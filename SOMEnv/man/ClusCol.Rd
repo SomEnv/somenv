@@ -17,8 +17,12 @@ ClusCol(Centroids, Cluster, colSeq = rainbow(nrow(data.frame(Centroids))))
 A vector of colors with length equal to Cluster
 }
 \description{
-Generate the sequence of colors to plot the SOM map according clusters
+Generate the sequence of colors to plot the SOM map according to clusters
+}
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
 }
 \author{
-S. Licen
+Sabina Licen
 }

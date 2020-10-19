@@ -14,11 +14,15 @@ FreqD(Date, Cluster, Total = 1440)
 \item{Total}{Number of observations per day}
 }
 \value{
-A data frame containing the monthly percentage frequency of each cluster
+A data frame containing the daily percentage frequency of each cluster
 }
 \description{
 Daily percentage frequency for each cluster
 }
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
 \author{
-S. Licen
+Sabina Licen
 }

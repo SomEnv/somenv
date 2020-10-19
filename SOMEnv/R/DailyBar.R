@@ -1,6 +1,6 @@
 #' Plot of daily percentages for each cluster
 #'
-#' The function tries to guess the correct total number of records per day (e.g. 1440 for minutely data)
+#' The function produces a plot representing the the daily percentage for each cluster
 #'
 #' @param experimental Experimental data (must contain variable "date")
 #' @param TrainClus Vector containing cluster number assignment for experimental data
@@ -8,20 +8,22 @@
 #' @param Total Number of observations per day
 #' @param xdim x axes label dimensions
 #' @param ydim y axes label dimensions
-#' @author S. Licen
-#' @return Plot of daily percentages for each cluster 
+#' @import openair
+#' @importFrom grDevices rainbow
+#' @importFrom graphics axis barplot legend par
+#' @importFrom stats quantile
+#' @author Sabina Licen
+#' @return Plot of daily percentages for each cluster, the latter element in the legend represents percentage of not determined data
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
-# Require openair!!!! Ultima riga sono le osservazione giornaliere not determined!!!
 
 DailyBar<-function(experimental,TrainClus,colSeq=rainbow(length(levels(as.factor(TrainClus)))),Total=1440,xdim=0.7,ydim=0.8)
 {colSeq<-c(colSeq,"black");
  nClus<-length(levels(as.factor(TrainClus)))
  g<-as.POSIXct(substr(experimental$date, 1, 10),format = "%Y-%m-%d",tz="GMT")#NEW!!!
-# g<-ordered(g, levels = unique(g))
  g2<-levels(as.factor(g))
- interval<-seq(as.POSIXct(g2[1],format = "%Y-%m-%d",tz="GMT"), as.POSIXct(g2[length(g2)],format = "%Y-%m-%d",tz="GMT"), by = "1 day") #NEW!!!
-# Count<-count(g)
-# Total<-round(median(Count$freq,na.rm=T),digit=0)
+ interval<-seq(as.POSIXct(g2[1],format = "%Y-%m-%d",tz="GMT"), as.POSIXct(g2[length(g2)],format = "%Y-%m-%d",tz="GMT"), by = "1 day")
  mydata<-data.frame(experimental$date,day=g,Cluster=TrainClus)
     FRE<-data.frame(Canc=rep(0,nClus+1));
     for  (j in interval) {Select<-mydata[which(mydata$day==j),];

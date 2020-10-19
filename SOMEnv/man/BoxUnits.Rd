@@ -15,7 +15,7 @@ BoxUnits(codebook, Cluster, Ylim = NA, pitch = NA, xdim = 0.75)
 
 \item{pitch}{Vector containing the position of horizontal grid lines}
 
-\item{ydim}{y axes label dimensions}
+\item{xdim}{x axes label dimensions}
 }
 \value{
 Boxplot of prototype variables split by cluster
@@ -23,6 +23,13 @@ Boxplot of prototype variables split by cluster
 \description{
 Boxplot function is used, box whiskers are omitted
 }
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
+\seealso{
+boxplot
+}
 \author{
-S. Licen
+Sabina Licen
 }

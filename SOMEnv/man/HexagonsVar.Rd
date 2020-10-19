@@ -11,23 +11,30 @@ HexagonsVar(Dms, codebook, Coords, Row, Col)
 
 \item{codebook}{SOM codebook}
 
+\item{Coords}{Prototype coordinates for plotting the map}
+
 \item{Row}{Number of SOM map rows}
 
 \item{Col}{Number of SOM map columns}
-
-\item{Coord}{Prototype coordinates for plotting the map}
 }
 \value{
-Plot a SOM map for the values of each modeled variable using a grayscale according to quartiles
+SOM map plots for the values of each modeled variable using a grayscale according to quartiles
 }
 \description{
-Multiple plots that show the distribution of the modeled variables on the map
+Multiple plots that show the distribution of the modeled variables on the SOM map
 }
 \details{
 The function plots a SOM map for the values of each modeled variable using a grayscale according to quartiles,
 from white (lower outliers), followed by grayscale (quartiles) and black (upper outiliers).
 The outilers and quartiles are evaluated by boxplot function applying default parameters.
 }
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
+\seealso{
+boxplot, par
+}
 \author{
-S. Licen
+Sabina Licen
 }

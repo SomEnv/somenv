@@ -19,9 +19,20 @@ som_initR(dataset, Row, Col, munits)
 This function returns an initialization matrix for SOM training
 }
 \description{
-Generate SOM map dimensions according to Vesanto heuristic rules related to the first two
+Generate SOM map initialization matrix according to Vesanto heuristic rules related to map dimensions, the first two
 eigenvalues of the experimental data and their related eigenvectors
+The function has been coded in R code starting from som_init.m
+script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
+}
+\examples{
+SOMdim<-som_dimR(iris[,1:4], type="small")
+SOMinit<-som_initR(iris[,1:4],SOMdim$Row,SOMdim$Col,SOMdim$munits)
+}
+\references{
+{J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+}
 }
 \author{
-S. Licen
+Sabina Licen, Pierluigi Barbieri
 }

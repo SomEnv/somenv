@@ -7,7 +7,7 @@
 paramQuant(param)
 }
 \arguments{
-\item{Numeric}{vector}
+\item{param}{Numeric vector}
 }
 \value{
 A table which contains basic statistics for the input vector
@@ -18,6 +18,13 @@ Generate basic statistics for the input vector
 \details{
 The outilers and quartiles are evaluated by boxplot function applying default parameters.
 }
+\examples{
+library(datasets)
+paramQuant(iris[,1])
+}
+\seealso{
+boxplot
+}
 \author{
-S. Licen
+Sabina Licen
 }

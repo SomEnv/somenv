@@ -31,6 +31,13 @@ then plots a SOM map with the realtive quantization error represented as graysca
 from white (lower outliers) followed by grayscale (quartiles) and black (upper outiliers).
 The outilers and quartiles are evaluated by boxplot function applying default parameters.
 }
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
+\seealso{
+boxplot
+}
 \author{
 S. Licen
 }

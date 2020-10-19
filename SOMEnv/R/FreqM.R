@@ -3,13 +3,12 @@
 #'
 #' @param Date Vector containing date/time variable for experimental data
 #' @param Cluster Vector containing cluster number assignment for experimental data
-#' @author S. Licen
+#' @author Sabina Licen
 #' @return A data frame containing the monthly percentage frequency of each cluster 
+#' @import openair
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
-# Percentage distribution of the experimental data divided by cluster and month
-# Periods with no data recorded are not considered
-
-# Require openair!!!!
 
 FreqM<-function(Date,Cluster)
 {   nClus<-length(levels(as.factor(Cluster)))

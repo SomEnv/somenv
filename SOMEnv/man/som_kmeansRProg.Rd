@@ -2,7 +2,7 @@
 % Please edit documentation in R/som_kmeansRProg.R
 \name{som_kmeansRProg}
 \alias{som_kmeansRProg}
-\title{K-means algorithm on codebook for Shiny}
+\title{K-means algorithm applied for a specific number of clusters}
 \usage{
 som_kmeansRProg(codebook, k, epochs, seed = NULL)
 }
@@ -17,15 +17,23 @@ som_kmeansRProg(codebook, k, epochs, seed = NULL)
 }
 \value{
 This function returns a list containing the cluster number assignment for each sample,
-the cluster centroids and the total quantization error
+the cluster centroids, the total quantization error, and the random seed number used
 }
 \description{
 The training is run for a custom number of epochs for k number of clusters
 }
 \details{
 The function has been coded in R code starting from som_kmeans.m
-script present in somtoolbox for Matlab by Vesanto
+script present in somtoolbox for Matlab by Vesanto and adapted to show a progress bar when working embedded in the shiny app.
+}
+\references{
+{J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+}
+}
+\seealso{
+set.seed
 }
 \author{
-S. Licen
+Sabina Licen, Pierluigi Barbieri
 }

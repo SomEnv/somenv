@@ -5,10 +5,12 @@
 #' @param centroids Centroids array (output of kmeans_clustersR function)
 #' @param som_model An object of class kohonen
 #' @param k Number of clusters
-#' @export
-#' @author S. Licen
-#' @return An array containing the BMUs for each centroid
-
+#'
+#' @author Sabina Licen
+#' @return An array containing the BMU for each centroid
+#' @importFrom kohonen map
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
 BmusCentr<-function (centroids,som_model,k) {
                                     A<-vector(mode = "list", length = k)

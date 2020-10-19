@@ -4,14 +4,17 @@
 #'
 #' The outilers and quartiles are evaluated by boxplot function applying default parameters.
 #'
-#' @param Numeric vector 
-#' @author S. Licen
-#' @return A table which contains basic statistics for the input vector   
+#' @param param Numeric vector
+#' @author Sabina Licen
+#' @return A table which contains basic statistics for the input vector
+#' @importFrom graphics boxplot
+#' @seealso boxplot
+#' @export
+#' @examples
+#' library(datasets)
+#' paramQuant(iris[,1])
 
-
-#################################################################### A POSTO
-# FUNZIONE per disegnare grafico con esagoni colorati a quantili secondo num. di Hits:
-paramQuant<-function(param) 
+paramQuant<-function(param)
 { Param<-unlist(param, recursive = TRUE, use.names = FALSE);
   BOX<-boxplot(Param,plot=FALSE);
   MIN<-min(Param,na.rm=TRUE);

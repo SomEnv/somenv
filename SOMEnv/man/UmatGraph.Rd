@@ -12,18 +12,29 @@ UmatGraph(umat, Row, Col, colorscale = c("bw", "gs"))
 \item{Row}{Number of SOM map rows}
 
 \item{Col}{Number of SOM map columns}
+
+\item{colorscale}{Either "bw" for grayscale or "gs" for green-white scale}
 }
 \value{
-Plot of Unified Distance Matrix using a grayscale according to quartiles
+Plot of Unified Distance Matrix using a grayscale or (green-white scale) according to quartiles
 }
 \description{
-Plot of Unified Distance Matrix using a grayscale according to quartiles
+Plot of Unified Distance Matrix using a colored scale according to quartiles
 }
 \details{
-The function plots a SOM map for the values of each modeled variable using a grayscale according to quartiles,
-from dark gray (lower distances) to light gray (higher distances).
+The function plots a U-matrix map for the values of each modeled variable using a grayscale according to quartiles,
+from darker color (lower distances) to lighter color (higher distances).
 The quartiles are evaluated by boxplot function applying default parameters.
 }
+\references{
+{J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf;
+Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
+\seealso{
+boxplot, som_umatR
+}
 \author{
-S. Licen
+Sabina Licen
 }

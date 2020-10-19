@@ -1,3 +1,20 @@
+#' Unified distance matrix for the SOM map
+#'
+#' The function has been coded in R code starting from som_umat.m
+#' script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
+#'
+#' @param codebook SOM codebook
+#' @param Row Number of SOM map rows
+#' @param Col Number of SOM map columns
+#' @author Sabina Licen, Pierluigi Barbieri
+#' @return The unified distance matrix for the SOM map
+#' @importFrom stats median
+#' @references {J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+#' 5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf;
+#' A. Ultsch, H.P. Siemon, Proceedings of International Neural Network Conference
+#' (INNC?90), Kluwer academic Publishers, Dordrecht, 1990, pp. 305?308.
+#' }
+
 som_umatR<-function(codebook,Row,Col) {
 
 M<-as.matrix(codebook)
@@ -63,13 +80,13 @@ for(j in seq(1,uy,2)) {
        } else if(j==1 & i>1 & i<ux) {A<-c(U[j,i-1],U[j,i+1],U[j+1,i-1],U[j+1,i])
        } else if(j==uy & i>1 & i<ux) {A<-c(U[j,i-1],U[j,i+1])
                      if((j-1)%%4==0) {A<-c(A,U[j-1,i-1],U[j-1,i]);
-                         } else {A<-c(A,U[j-1,i],U[j-1,i+1])}                             
+                         } else {A<-c(A,U[j-1,i],U[j-1,i+1])}
        } else if(i==1 & j>1 & j<uy) {A<-c(U[j,i+1])
                      if((j-1)%%4==0) {A<-c(A,U[j-1,i],U[j+1,i]);
-                         } else {A<-c(A,U[j-1,i],U[j-1,i+1],U[j+1,i],U[j+1,i+1])}  
+                         } else {A<-c(A,U[j-1,i],U[j-1,i+1],U[j+1,i],U[j+1,i+1])}
        } else if(i==ux & j>1 & j<uy) {A<-c(U[j,i-1])
                      if((j-1)%%4==0) {A<-c(A,U[j-1,i],U[j-1,i-1],U[j+1,i],U[j+1,i-1]);
-                         } else {A<-c(A,U[j-1,i],U[j+1,i])}  
+                         } else {A<-c(A,U[j-1,i],U[j+1,i])}
        } else if(i==1 & j==1) {A<-c(U[j,i+1],U[j+1,i])
        } else if(i==ux & j==1) {A<-c(U[j,i-1],U[j+1,i-1],U[j+1,i])
        } else if(i==1 & j==uy) {
@@ -83,7 +100,7 @@ for(j in seq(1,uy,2)) {
    }
 }
 
-return(U) 
+return(U)
 
 }# END function
 

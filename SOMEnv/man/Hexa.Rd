@@ -21,8 +21,8 @@ Hexa(x, y, col = NA, border = "gray", unitcell = 1)
 This function draws an hexagon on a plot
 }
 \description{
-Draw an hexagon around a point of x and y coordinates
+Draws an hexagon around a point of x and y coordinates
 }
 \author{
-S. Licen
+Sabina Licen
 }

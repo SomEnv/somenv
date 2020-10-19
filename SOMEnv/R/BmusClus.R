@@ -4,8 +4,11 @@
 #'
 #' @param Bmus Best Matching Unit assignment to the experimental data
 #' @param Cluster Vector containing cluster number assignment for prototypes
-#' @author S. Licen
-#' @return A vector containing the cluster assignment to experimental data 
+#' @author Sabina Licen
+#' @return A vector containing the cluster assignment to experimental data
+#' @importFrom plyr mapvalues
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
 BmusClus<-function(Bmus,Cluster)
 {   TotBmus<-data.frame(Bmus=Bmus);

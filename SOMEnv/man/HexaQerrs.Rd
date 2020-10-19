@@ -16,6 +16,8 @@ HexaQerrs(bmus, qerrs, Coord, Row, Col, col = "black")
 \item{Row}{Number of SOM map rows}
 
 \item{Col}{Number of SOM map columns}
+
+\item{col}{color filling of the hexagonsType a message}
 }
 \value{
 Plot a SOM map with filled hexagons according to the realtive quantization error
@@ -29,6 +31,10 @@ dividing the sum of quantization errors for experimental samples represented by 
 prototype by the number of hits of the same prototype,
 then plots a SOM map with with filled hexagons according to the realtive quantization error
 }
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
 \author{
-S. Licen
+Sabina Licen
 }

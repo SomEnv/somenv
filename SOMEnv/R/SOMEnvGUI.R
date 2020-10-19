@@ -1,20 +1,27 @@
+#' The function starts the SOMEnv GUI
+#'
+#' @author Sabina Licen, Marco Franzon, Tommaso Rodani
+#'
+#' @return This function starts the graphical user interface with the default system browser.
+#'The main help suggestion for using the tool are embedded in the GUI
+#'
+#' @references {Winston Chang, Joe Cheng, JJ Allaire, Yihui Xie and Jonathan
+#'             McPherson (2019). shiny: Web Application Framework for R. R package
+#'             version 1.4.0. https://CRAN.R-project.org/package=shiny
+#' }
+#'
+#'seealso shiny
+#'
 #' @export
-SOMEnvGUI <- function() {
-  appDir <- system.file("shiny-examples", "myapp", package = "SOMEnv")
-  if (appDir == "") {
-    stop("Could not find example directory. Try re-installing `SOMEnv`.", call. = FALSE)
-  }
+#' @examples
+#' \dontrun{
+#' SomEnvGUI()
+#' }
 
-  shiny::runApp(appDir, display.mode = "normal")
+
+
+SomEnvGUI <- function() {
+  shiny::runApp(system.file('shiny', package='SOMEnv'))
 }
-
-library(rlist)
-library(kohonen)
-library(shiny)
-library(plyr)
-library(colourpicker)
-library(openair)
-library(shinycssloaders)
-library(shinycustomloader)
 
 

@@ -1,11 +1,15 @@
 #' Evaluate pairwise distance matrix for the given codebook
 #'
 #' The function has been coded in R code starting from som_mdist.m
-#' script present in somtoolbox for Matlab by Vesanto 
+#' script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app 
 #'
 #' @param codebook SOM codebook
-#' @author S. Licen
-#' @return Distance matrix (used in db_indexR function)
+#' @author Sabina Licen, Pierluigi Barbieri
+#' @return Distance matrix
+#' @seealso db_indexR
+#' @references {J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+#' 5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+#' }
 
 som_mdistR<-function(codebook) {
 

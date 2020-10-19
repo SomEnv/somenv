@@ -18,5 +18,5 @@ A vector of same length as input vector with cluuster numbers changed according 
 Changes the input vector according the custom number sequence for clusters
 }
 \author{
-S. Licen
+Sabina Licen
 }

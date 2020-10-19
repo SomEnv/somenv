@@ -30,11 +30,15 @@ HexagonsClus(
 \item{colSeq}{Color sequence for the clusters}
 }
 \value{
-A SOM map with clusters
+A SOM map colored according to cluster splitting
 }
 \description{
-Generate the sequence of colors to plot the SOM map according clusters
+Generates a SOM map colored according to cluster splitting
+}
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
 }
 \author{
-S. Licen
+Sabina Licen
 }

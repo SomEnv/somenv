@@ -1,13 +1,17 @@
-#' Evaluate Davis-Bouldin index
+#' Evaluate Davis-Bouldin index for the cluster split of data input
 #'
 #' The function has been coded in R code starting from db_index.m
-#' script present in somtoolbox for Matlab by Vesanto 
+#' script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
 #'
 #' @param codebook SOM codebook
 #' @param k_best Vector with cluster number assignment for each sample
 #' @param c_best Matrix with cluster centroids
-#' @author S. Licen
+#' @author Sabina Licen, Pierluigi Barbieri
 #' @return The mean DB-index for the clustering
+#' @references {J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+#' 5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+#' }
+#' @seealso som_mdistR, kmeans_clustersRProg
 
 db_indexR<-function(codebook,k_best,c_best){
 D<-as.matrix(codebook)
@@ -19,8 +23,7 @@ count<-length(u)
 
 C<-c_best
 
-#Action
-#Dispersion of each cluster
+
 
 S<-rep(NA,count)
 for(i in c(1:count)) {
@@ -31,10 +34,8 @@ if (lin>0) {S[i]<-mean(
 } else {S[i]<-NA}
 }
 
-# Distance matrix
 M<-som_mdistR(C)
 
-# Davies-Bouldin index
 
 R<-matrix(rep(NA,count^2),count,count)
 r<-rep(NA,count)

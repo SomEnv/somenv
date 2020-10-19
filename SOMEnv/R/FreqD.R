@@ -1,23 +1,20 @@
 #' Daily percentage frequency for each cluster
 #'
 #'
-#' @param Date Vector containing date/time variable for experimental data 
+#' @param Date Vector containing date/time variable for experimental data
 #' @param Cluster Vector containing cluster number assignment for experimental data
 #' @param Total Number of observations per day
-#' @author S. Licen
-#' @return A data frame containing the monthly percentage frequency of each cluster 
-
-
-# Require openair e plyr!!!! Ultima riga sono le osservazione giornaliere not determined!!!
+#' @author Sabina Licen
+#' @return A data frame containing the daily percentage frequency of each cluster
+#' @import openair dplyr
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
 FreqD<-function(Date,Cluster,Total=1440)
 {   nClus<-length(levels(as.factor(Cluster)))
  g<-as.POSIXct(substr(Date, 1, 10),format = "%Y-%m-%d",tz="GMT")#NEW!!!
-# g<-ordered(g, levels = unique(g))
  g2<-levels(as.factor(g))
- interval<-seq(as.POSIXct(g2[1],format = "%Y-%m-%d",tz="GMT"), as.POSIXct(g2[length(g2)],format = "%Y-%m-%d",tz="GMT"), by = "1 day") #NEW!!!
-# Count<-count(g)
-# Total<-round(median(Count$freq,na.rm=T),digit=0)
+ interval<-seq(as.POSIXct(g2[1],format = "%Y-%m-%d",tz="GMT"), as.POSIXct(g2[length(g2)],format = "%Y-%m-%d",tz="GMT"), by = "1 day")
  mydata<-data.frame(date=Date,day=g,Cluster=Cluster)
     FRE<-data.frame(Canc=rep(0,nClus+1));
     for  (j in interval) {Select<-mydata[which(mydata$day==j),];

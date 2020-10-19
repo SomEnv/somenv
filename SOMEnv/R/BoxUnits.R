@@ -4,14 +4,17 @@
 #'
 #' @param codebook Prototype codebook normalized by variable
 #' @param Cluster Vector containing cluster number assignment for prototypes
-#' @param Ylim Vector of length 2 for y-axis limits 
-#' @param ydim y axes label dimensions
+#' @param Ylim Vector of length 2 for y-axis limits
+#' @param xdim x axes label dimensions
 #' @param pitch Vector containing the position of horizontal grid lines
-#' @author S. Licen
-#' @return Boxplot of prototype variables split by cluster 
+#' @author Sabina Licen
+#' @return Boxplot of prototype variables split by cluster
+#' @importFrom graphics abline axis boxplot mtext par
+#' @seealso boxplot
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
-################################################################################ A POSTO
-# FUNZIONE per disegnare profili boxplot prototipi
+
 
 BoxUnits<-function(codebook,Cluster,Ylim=NA,pitch=NA,xdim=0.75)
 {nClus<-length(levels(as.factor(Cluster)));
@@ -30,7 +33,7 @@ BoxUnits<-function(codebook,Cluster,Ylim=NA,pitch=NA,xdim=0.75)
   boxwex=0.9,at=1,whisklty = 0, staplelty = 0);
     if (is.na(sum(pitch))) {abline(h=c(0,round(M,digit=0)),col="gray")
     } else {abline(h=pitch,col="gray")}
-  for (i in c(2:ncol(codebook))) 
+  for (i in c(2:ncol(codebook)))
   {boxplot(data[which(data$Cluster==j),i],range=0,xaxt="n",yaxt="n",boxwex=0.9,at=i,add=TRUE,whisklty = 0, staplelty = 0)};
   axis(1,at=seq(1,ncol(codebook),1),labels=NA,tcl=-0.3,cex.axis=0.7);
   axis(1,at=seq(1,ncol(codebook),1),labels=Names,lwd=0,line=-0.5,cex.axis=xdim);

@@ -7,17 +7,18 @@
 #' The prototype with the maximum number of hits is represented by a red hexagon.
 #' The outilers and quartiles are evaluated by boxplot function applying default parameters.
 #'
-#' @param hits Vector with number of hits for each prototype 
+#' @param hits Vector with number of hits for each prototype
 #' @param Coord Prototype coordinates for plotting the map
 #' @param Row Number of SOM map rows
 #' @param Col Number of SOM map columns
-#' @author S. Licen
-#' @return Plot a SOM map with hits represented as grayscale according to quartiles   
+#' @author Sabina Licen
+#' @return Plot a SOM map with hits represented as grayscale according to quartiles
+#' @seealso boxplot
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
+#' @importFrom graphics boxplot
 
-
-#################################################################### A POSTO
-# FUNZIONE per disegnare grafico con esagoni colorati a quantili secondo num. di Hits:
-HexaHitsQuant<-function(hits,Coord,Row,Col) 
+HexaHitsQuant<-function(hits,Coord,Row,Col)
 { Hexagons(Coord,Row,Col,col = NA, border = NA);
   colSeq <- c("white","gray85","gray75","gray60","gray50","black");
   Hits<-unlist(hits, recursive = TRUE, use.names = FALSE);
@@ -30,7 +31,10 @@ HexaHitsQuant<-function(hits,Coord,Row,Col)
      if (max(Hits,na.rm=TRUE)==BOX$stats[5]){MAX<-NULL; MAXCol<-NULL} else {};
   Breaks<-c(MIN,as.numeric(BOX$stats),MAX);
   Labels<-c(MINCol,INTRACol,MAXCol);
-  FACT<-cut(Hits, breaks=Breaks,labels = Labels,include.lowest = FALSE, right = TRUE);
+DIV<-.bincode(Hits, breaks=Breaks,include.lowest = FALSE, right = TRUE);
+      ab<-as.factor(as.numeric(DIV));
+     FACT<-factor(ab,levels=levels(ab),Labels[as.numeric(levels(ab))]);
+     FACT<-as.character(FACT)
 for (i in c(1:nrow(Coord))) {Hexa(Coord$X[i],Coord$Y[i],col=as.character(FACT[i]),border="gray85")};
 }
 

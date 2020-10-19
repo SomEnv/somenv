@@ -12,18 +12,24 @@ CodeCoord(Row, Col)
 \item{Col}{Number of SOM map columns}
 }
 \value{
-This function returns a \code{data.frame} including columns: 
+This function returns a \code{data.frame} including columns:
 \itemize{
  \item X
  \item Y
 }
 }
 \description{
-Generate X and Y coordinates for plotting a SOM map "Vesanto like"
+Generate X and Y coordinates for plotting a SOM map shaped according to Vesanto visualization fashion
 }
 \examples{
 Coord<-CodeCoord(10,5)
 }
+\references{
+{J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf;
+Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
 \author{
-S. Licen
+Sabina Licen, Pierluigi Barbieri
 }

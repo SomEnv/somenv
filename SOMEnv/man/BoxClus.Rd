@@ -9,7 +9,7 @@ BoxClus(Dms, codebook, Cluster)
 \arguments{
 \item{Dms}{A vector of length 2, where the first argument specifies the number of rows and the second the number of columns of plots (see mfrow in par)}
 
-\item{codebook}{Prototype codebook de-normalized}
+\item{codebook}{De-normalized prototype codebook}
 
 \item{Cluster}{Vector containing cluster number assignment for prototypes}
 }
@@ -19,6 +19,13 @@ Boxplot of prototype variables split by cluster
 \description{
 Boxplot function is used, box whiskers are omitted
 }
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
+}
+\seealso{
+boxplot, par
+}
 \author{
-S. Licen
+Sabina Licen
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/db_indexR.R
 \name{db_indexR}
 \alias{db_indexR}
-\title{Evaluate Davis-Bouldin index}
+\title{Evaluate Davis-Bouldin index for the cluster split of data input}
 \usage{
 db_indexR(codebook, k_best, c_best)
 }
@@ -18,8 +18,16 @@ The mean DB-index for the clustering
 }
 \description{
 The function has been coded in R code starting from db_index.m
-script present in somtoolbox for Matlab by Vesanto
+script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
+}
+\references{
+{J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+}
+}
+\seealso{
+som_mdistR, kmeans_clustersRProg
 }
 \author{
-S. Licen
+Sabina Licen, Pierluigi Barbieri
 }

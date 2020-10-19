@@ -27,11 +27,15 @@ DailyBar(
 \item{ydim}{y axes label dimensions}
 }
 \value{
-Plot of daily percentages for each cluster
+Plot of daily percentages for each cluster, the latter element in the legend represents percentage of not determined data
 }
 \description{
-The function tries to guess the correct total number of records per day (e.g. 1440 for minutely data)
+The function produces a plot representing the the daily percentage for each cluster
+}
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
 }
 \author{
-S. Licen
+Sabina Licen
 }

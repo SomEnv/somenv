@@ -2,9 +2,10 @@
 #'
 #'
 #' @param Cluster Vector containing cluster number assignment for experimental data
-#' @author S. Licen
+#' @author Sabina Licen
 #' @return A data frame containing the percentage frequency of each cluster 
-
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
 Freq<-function(Cluster)
 {FRE<-NULL

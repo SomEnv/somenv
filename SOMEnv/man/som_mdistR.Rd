@@ -10,12 +10,20 @@ som_mdistR(codebook)
 \item{codebook}{SOM codebook}
 }
 \value{
-Distance matrix (used in db_indexR function)
+Distance matrix
 }
 \description{
 The function has been coded in R code starting from som_mdist.m
-script present in somtoolbox for Matlab by Vesanto
+script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
+}
+\references{
+{J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+}
+}
+\seealso{
+db_indexR
 }
 \author{
-S. Licen
+Sabina Licen, Pierluigi Barbieri
 }

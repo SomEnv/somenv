@@ -4,7 +4,7 @@
 #'
 #' @param Vector Vector containing cluster number assignment for prototypes or experimental data
 #' @param NCh Vector with custom sequence of numbers for clusters
-#' @author S. Licen
+#' @author Sabina Licen
 #' @return A vector of same length as input vector with cluuster numbers changed according to custom input
 
 

@@ -1,11 +1,23 @@
 #' Calculate map dimensions
 #'
-#' Generate SOM map dimensions according to Vesanto heuristic rules
+#' Generate SOM map dimensions according to Vesanto heuristic rules based on the first two
+#' eigenvalues of the experimental data and their related eigenvectors
+#' The function has been coded in R code starting from som_dim.m
+#' script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
 #'
 #' @param dataset Experimental data
 #' @param type Either "regular", "small" or "big" map (default ="regular")
-#' @author S. Licen
+#' @author Sabina Licen, Pierluigi Barbieri
 #' @return This function returns a list containing the number of rows, columns and overall map units
+#' @importFrom stats cor
+#' @references {J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
+#' 5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
+#' }
+#' @seealso eigen, cor
+#' @export
+#' @examples
+#' library(datasets)
+#' som_dimR(iris[,1:4], type="small")
 
 som_dimR<-function(dataset,type="regular") {
 CorDat<-cor(dataset)

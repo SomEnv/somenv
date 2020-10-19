@@ -3,15 +3,18 @@
 #' Boxplot function is used, box whiskers are omitted
 #'
 #' @param Dms A vector of length 2, where the first argument specifies the number of rows and the second the number of columns of plots (see mfrow in par)
-#' @param codebook Prototype codebook de-normalized
+#' @param codebook De-normalized prototype codebook
 #' @param Cluster Vector containing cluster number assignment for prototypes
-#' @author S. Licen
-#' @return Boxplot of prototype variables split by cluster 
+#' @author Sabina Licen
+#' @return Boxplot of prototype variables split by cluster
+#' @seealso boxplot, par
+#' @importFrom graphics axis boxplot mtext par
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
-################################################################################ A POSTO
-# FUNZIONE per disegnare profili boxplot prototipi per cluster
 
-BoxClus<-function (Dms,codebook,Cluster) 
+
+BoxClus<-function (Dms,codebook,Cluster)
 { ColIndex<-c(1:ncol(codebook))
   if ((Dms[1]*Dms[2])>=length(ColIndex)) {ColIndex<-ColIndex
   } else {ColIndex<-c(1:(Dms[1]*Dms[2]))}

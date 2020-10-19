@@ -7,6 +7,8 @@
 Hexagons(Coords, Row, Col, color = NA, border = "gray", unitcell = 1)
 }
 \arguments{
+\item{Coords}{matrix containing the x and y coordinates of the hexagon centers}
+
 \item{Row}{Number of SOM map rows}
 
 \item{Col}{Number of SOM map columns}
@@ -16,21 +18,21 @@ Hexagons(Coords, Row, Col, color = NA, border = "gray", unitcell = 1)
 \item{border}{Border color of the hexagons (default "gray")}
 
 \item{unitcell}{The distance side to side between two parallel sides of the hexagon (default 1)}
-
-\item{x}{X-coordinates of the hexagon centers}
-
-\item{y}{Y-coordinates of the hexagon centers}
 }
 \value{
 A hexagonal SOM map
 }
 \description{
-Draw an hexagon around a point of x and y coordinates
+Draws an hexagonal SOM map using x, y coordinates for the hexagon centers
 }
 \examples{
 Coord<-CodeCoord(10,5)
-Hexagons(Coord$XC,Coord$YC,10,5)
+Hexagons(Coord$X,Coord$Y,10,5)
+}
+\references{
+{Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+}
 }
 \author{
-S. Licen
+Sabina Licen
 }

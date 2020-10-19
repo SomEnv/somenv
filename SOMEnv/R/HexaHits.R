@@ -7,12 +7,10 @@
 #' @param Row Number of SOM map rows
 #' @param Col Number of SOM map columns
 #' @param col color filling of the hexagons
-#' @author S. Licen
+#' @author Sabina Licen
 #' @return Plot a SOM map with filled hexagons according to the number of hits   
-
-
-####################################################################
-# FUNZIONE per disegnare grafico con esagoni grandi in scala secondo num. di Hits:
+#' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
+#' }
 
 HexaHits<-function(hits,Coord,Row,Col,col="black") 
 {  Unitcell<-1
