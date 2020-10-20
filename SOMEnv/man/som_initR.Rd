@@ -25,6 +25,7 @@ The function has been coded in R code starting from som_init.m
 script present in somtoolbox for Matlab by Vesanto and adapted for the use in the shiny app
 }
 \examples{
+
 SOMdim<-som_dimR(iris[,1:4], type="small")
 SOMinit<-som_initR(iris[,1:4],SOMdim$Row,SOMdim$Col,SOMdim$munits)
 }

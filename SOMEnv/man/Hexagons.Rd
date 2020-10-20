@@ -27,7 +27,7 @@ Draws an hexagonal SOM map using x, y coordinates for the hexagon centers
 }
 \examples{
 Coord<-CodeCoord(10,5)
-Hexagons(Coord$X,Coord$Y,10,5)
+Hexagons(Coord,10,5)
 }
 \references{
 {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414

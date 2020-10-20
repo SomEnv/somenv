@@ -15,8 +15,9 @@
 #' @references {J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
 #' 5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
 #' }
-#'
+#' @export
 #' @examples
+#'
 #' SOMdim<-som_dimR(iris[,1:4], type="small")
 #' SOMinit<-som_initR(iris[,1:4],SOMdim$Row,SOMdim$Col,SOMdim$munits)
 

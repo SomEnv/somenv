@@ -1,7 +1,7 @@
 Package: SOMEnv
 Type: Package
 Title: SOMEnv
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: as.person(c(
 	"Sabina Licen <slicen@units.it> [aut, cre]",
 	"Marco Franzon <franzonmarco94@gmail.com> [aut]",

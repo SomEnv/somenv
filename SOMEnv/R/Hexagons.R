@@ -17,7 +17,7 @@
 #' @export
 #' @examples
 #' Coord<-CodeCoord(10,5)
-#' Hexagons(Coord$X,Coord$Y,10,5)
+#' Hexagons(Coord,10,5)
 
 
 Hexagons<-function (Coords,Row,Col,color = NA, border = "gray",unitcell=1)
