@@ -3,7 +3,8 @@
 #Cambiata funzione SOMtopol e quindi cambiato un po' lo script nel server
 #Cambiato lo script per la conta delle Hits nel server (non comparivano i prototipi con 0 hits!)
 
-
+library(shinycssloaders)
+library(shinycustomloader)
 
 #---- Upload file fino a 100 MB consentito:
 
