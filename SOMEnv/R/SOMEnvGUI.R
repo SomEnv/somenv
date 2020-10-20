@@ -21,7 +21,7 @@
 
 
 SomEnvGUI <- function() {
-  shiny::runApp(system.file('shiny', package='SOMEnv'))
+  shiny::runApp(system.file('shiny-examples/myapp', package='SOMEnv'))
 }
 
 
