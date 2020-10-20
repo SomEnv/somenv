@@ -77,7 +77,7 @@ ui <- pageWithSidebar(
                         tags$h4("An R package dedicated to the analysis of multivariate environmental high frequency data
                   by Self-Organizing Map and k-means clustering algorithms"),
                         tags$h5("Large datasets up to 100 MB are allowed!"),
-                        tags$h5("Authors: S. Licen, P. Barbieri"),
+                        tags$h5("Authors: S. Licen, M. Franzon, T. Rodani P. Barbieri"),
                         tags$h5("Licence: GPL-2.0")
                ),# fluidRow END
                
