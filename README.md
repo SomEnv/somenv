@@ -1,5 +1,6 @@
 # SOMEnv
 
+![Alt text](logo.jpg?raw=true)
 
 
 Self-Organizing Map algorithm application for the analysis of multivariate environmental high frequency data. This package is dedicated to the analysis of multivariate environmental high frequency data by Self-Organizing Map and k-means clustering algorithms. By means of the graphical user interface it provides a confortable way to elaborate by self-organizing map algorithm rather big datasets (txt files up to 100 MB ) obtained by environmental high-frequency monitoring by sensors/instruments. The functions present in the package are based on kohonen and openair packages implemented by functions embedding Vesanto et al. (2001) heuristic rules for map inizialization parameters, kmeans clustering algorithm and map features visualization. Cluster profiles visualization as well as graphs dedicated to the visualization of time-dependent variables Licen et al. (2020) are provided.
