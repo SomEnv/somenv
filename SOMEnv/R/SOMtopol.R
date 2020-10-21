@@ -12,7 +12,7 @@
 #'@importFrom stats dist
 
 SOMtopol<-function(dataset,codebook,grid) {
-              GridDist<-round(as.matrix(dist(grid)),digit=3)
+              GridDist<-round(as.matrix(dist(grid)),digits=3)
               D<-dataset
               M<-codebook
               dlen<-nrow(D)
@@ -39,6 +39,6 @@ SOMtopol<-function(dataset,codebook,grid) {
               CountFinal<-Count
               CountFinal[which(CountFinal<=1)]<-0
               CountFinal[which(CountFinal>1)]<-1
-              TE<-round(mean(CountFinal),digit=6)
+              TE<-round(mean(CountFinal),digits=6)
               return(TE)
           }

@@ -4,7 +4,7 @@
 \alias{HexaQerrs}
 \title{Realtive quantization error distribution on the SOM map}
 \usage{
-HexaQerrs(bmus, qerrs, Coord, Row, Col, col = "black")
+HexaQerrs(bmus, qerrs, Coord, Row, Col, color = "black")
 }
 \arguments{
 \item{bmus}{Vector with Best Matching Unit for each experimental sample}
@@ -17,7 +17,7 @@ HexaQerrs(bmus, qerrs, Coord, Row, Col, col = "black")
 
 \item{Col}{Number of SOM map columns}
 
-\item{col}{color filling of the hexagonsType a message}
+\item{color}{color filling of the hexagonsType a message}
 }
 \value{
 Plot a SOM map with filled hexagons according to the realtive quantization error

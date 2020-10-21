@@ -41,9 +41,9 @@ DIV<-.bincode(codebook[,Var], breaks=Breaks,include.lowest = FALSE, right = TRUE
       ab<-as.factor(as.numeric(DIV));
      FACT<-factor(ab,levels=levels(ab),Labels[as.numeric(levels(ab))]);
      FACT<-as.character(FACT)
-Hexagons(Coords,Row,Col,col = NA, border = NA);
+Hexagons(Coords,Row,Col,color = NA, border = NA);
    Colors<-as.character(FACT);
-   for (i in c(1:nrow(Coords))) {Hexa(Coords$X[i],Coords$Y[i],col=Colors[i],border=NA)}
+   for (i in c(1:nrow(Coords))) {Hexa(Coords$X[i],Coords$Y[i],color=Colors[i],border=NA)}
    mtext(colnames(codebook)[Var],line = 0,side=3,cex=0.75,family="serif",font=2)
                }
 }

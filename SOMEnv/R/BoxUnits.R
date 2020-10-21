@@ -31,14 +31,14 @@ BoxUnits<-function(codebook,Cluster,Ylim=NA,pitch=NA,xdim=0.75)
   for (j in c(1:nClus)) {par(mar=c(1.4,1,1.7,0.5));
   boxplot(data[which(data$Cluster==j),1],range=0,xaxt="n",yaxt="n",xlim=c(1,ncol(codebook)),ylim=Ylim,
   boxwex=0.9,at=1,whisklty = 0, staplelty = 0);
-    if (is.na(sum(pitch))) {abline(h=c(0,round(M,digit=0)),col="gray")
+    if (is.na(sum(pitch))) {abline(h=c(0,round(M,digits=0)),col="gray")
     } else {abline(h=pitch,col="gray")}
   for (i in c(2:ncol(codebook)))
   {boxplot(data[which(data$Cluster==j),i],range=0,xaxt="n",yaxt="n",boxwex=0.9,at=i,add=TRUE,whisklty = 0, staplelty = 0)};
   axis(1,at=seq(1,ncol(codebook),1),labels=NA,tcl=-0.3,cex.axis=0.7);
   axis(1,at=seq(1,ncol(codebook),1),labels=Names,lwd=0,line=-0.5,cex.axis=xdim);
-    if (is.na(sum(pitch))) {axis(2,at=c(0,round(M,digit=0)),labels=NA,tcl=-0.3,cex.axis=0.7);
-    axis(2,at=c(0,round(M,digit=0)),labels=c(0,round(M,digit=0)),lwd=0,line=-0.7,cex.axis=0.75,las=2);
+    if (is.na(sum(pitch))) {axis(2,at=c(0,round(M,digits=0)),labels=NA,tcl=-0.3,cex.axis=0.7);
+    axis(2,at=c(0,round(M,digits=0)),labels=c(0,round(M,digits=0)),lwd=0,line=-0.7,cex.axis=0.75,las=2);
     } else {axis(2,at=pitch,labels=NA,tcl=-0.3,cex.axis=0.7);axis(2,at=pitch,labels=pitch,lwd=0,line=-0.7,cex.axis=0.75,las=2)}
   mtext(paste("Cluster ",j,sep=""),line = 0.2,side=3,cex=0.75,family="serif")}
 }

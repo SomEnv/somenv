@@ -4,14 +4,14 @@
 \alias{Hexa}
 \title{Function to draw an hexagon around a point}
 \usage{
-Hexa(x, y, col = NA, border = "gray", unitcell = 1)
+Hexa(x, y, color = NA, border = "gray", unitcell = 1)
 }
 \arguments{
 \item{x}{X-coordinate of the hexagon center}
 
 \item{y}{Y-coordinate of the hexagon center}
 
-\item{col}{Filling color of the hexagon (default NA)}
+\item{color}{Filling color of the hexagon (default NA)}
 
 \item{border}{Border color of the hexagon (default "gray")}
 

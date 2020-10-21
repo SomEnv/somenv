@@ -28,7 +28,7 @@ DailyBar<-function(experimental,TrainClus,colSeq=rainbow(length(levels(as.factor
     FRE<-data.frame(Canc=rep(0,nClus+1));
     for  (j in interval) {Select<-mydata[which(mydata$day==j),];
     fre<-NULL;
-    for  (i in c(1:nClus)) {n<-nrow(Select[which(Select$Cluster==i),])/Total*100;fre<-c(fre,round(n,digit=1))}
+    for  (i in c(1:nClus)) {n<-nrow(Select[which(Select$Cluster==i),])/Total*100;fre<-c(fre,round(n,digits=1))}
     s<-(100-sum(fre,na.rm=T));fre<-c(fre,s);FRE<-cbind(FRE,fre)}
     FRE<-data.frame(FRE)
     FRE<-FRE[,-1]

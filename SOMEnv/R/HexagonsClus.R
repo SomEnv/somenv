@@ -19,8 +19,8 @@
 HexagonsClus<-function(Centroids,Cluster,BCentr,Coord,Row,Col,colSeq=rainbow(nrow(Centroids)))
 {  Vector<-Cluster;
    Colors<-ClusCol(Centroids,Vector,colSeq=colSeq);
-   Hexagons(Coord,Row, Col,col = NA, border = NA)
-   for (i in c(1:nrow(Coord))) {Hexa(Coord$X[i],Coord$Y[i],col=Colors[i],border="gray")}
-   text(Coord[BCentr,"X"],Coord[BCentr,"Y"],c(1:nrow(Centroids)),cex=1,font=2,col="black")
+   Hexagons(Coord,Row, Col,color = NA, border = NA)
+   for (i in c(1:nrow(Coord))) {Hexa(Coord$X[i],Coord$Y[i],color=Colors[i],border="gray")}
+   text(Coord[BCentr,"X"],Coord[BCentr,"Y"],c(1:nrow(Centroids)),cex=1,font=2,color="black")
 }
 

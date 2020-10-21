@@ -28,8 +28,8 @@ munits<-ceiling(5*nrow(dataset)^0.5)
          regular = {munits<-munits},
          small = {munits<-max(9,ceiling(munits/4),na.rm=T)},
          big = {munits<-4*munits})
-Col<-max(2,(min(munits,round((munits/Ratio*(0.75^0.5))^0.5,digit=0)))) # Col must be more than 1
-Row<-max(2,round(munits/Col,digit=0)) # Row must be more than 1
+Col<-max(2,(min(munits,round((munits/Ratio*(0.75^0.5))^0.5,digits=0)))) # Col must be more than 1
+Row<-max(2,round(munits/Col,digits=0)) # Row must be more than 1
 munits<-Row*Col
 return(list(Row=Row,Col=Col,munits=munits))
 }

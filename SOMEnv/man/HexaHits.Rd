@@ -4,7 +4,7 @@
 \alias{HexaHits}
 \title{Hits distribution on the SOM map}
 \usage{
-HexaHits(hits, Coord, Row, Col, col = "black")
+HexaHits(hits, Coord, Row, Col, color = "black")
 }
 \arguments{
 \item{hits}{Vector with number of hits for each prototype}
@@ -15,7 +15,7 @@ HexaHits(hits, Coord, Row, Col, col = "black")
 
 \item{Col}{Number of SOM map columns}
 
-\item{col}{color filling of the hexagons}
+\item{color}{color filling of the hexagons}
 }
 \value{
 Plot a SOM map with filled hexagons according to the number of hits

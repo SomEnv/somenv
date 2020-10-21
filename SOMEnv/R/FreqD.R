@@ -19,8 +19,8 @@ FreqD<-function(Date,Cluster,Total=1440)
     FRE<-data.frame(Canc=rep(0,nClus+1));
     for  (j in interval) {Select<-mydata[which(mydata$day==j),];
     fre<-NULL;
-    for  (i in c(1:nClus)) {n<-nrow(Select[which(Select$Cluster==i),])/Total*100;fre<-c(fre,round(n,digit=1))}
-    s<-(100-sum(fre,na.rm=T));fre<-c(fre,round(s,digit=1));FRE<-cbind(FRE,fre)}
+    for  (i in c(1:nClus)) {n<-nrow(Select[which(Select$Cluster==i),])/Total*100;fre<-c(fre,round(n,digits=1))}
+    s<-(100-sum(fre,na.rm=T));fre<-c(fre,round(s,digits=1));FRE<-cbind(FRE,fre)}
     FRE<-data.frame(FRE)
     FRE<-FRE[,-1]
     colnames(FRE)<-paste0(substr(interval, 9, 10),"/",substr(interval, 6, 7))

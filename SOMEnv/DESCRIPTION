@@ -2,14 +2,14 @@ Package: SOMEnv
 Type: Package
 Title: SOMEnv
 Version: 0.1.1
-Authors@R: as.person(c(
-	"Sabina Licen <slicen@units.it> [aut, cre]",
-	"Marco Franzon <franzonmarco94@gmail.com> [aut]",
-	"Tommaso Rodani <tommaso.rodani@gmail.com> [aut]",
-	"Pierluigi Barbieri <barbierip@units.it> [aut]"
-	))
+Authors@R: c(
+	person("Sabina", "Licen", role=c("aut", "cre"), email= "slicen@units.it"),
+	person("Marco", "Franzon", role=c("aut"), email = "franzonmarco94@gmail.com"),
+	person("Tommaso", "Rodani", role=c("aut"), email = "tommaso.rodani@gmail.com"),
+	person("Pierluigi", "Barbieri", role=c("aut"), email = "barbierip@units.it")
+	)
 Maintainer: Sabina Licen <slicen@units.it>
-Description: Self-Organizing Map algorithm application for the analysis of multivariate environmental high frequency data. This package is dedicated to the analysis of multivariate environmental high frequency data by Self-Organizing Map and k-means clustering algorithms. By means of the graphical user interface it provides a confortable way to elaborate by self-organizing map algorithm rather big datasets (txt files up to 100 MB ) obtained by environmental high-frequency monitoring by sensors/instruments. The functions present in the package are based on kohonen and openair packages implemented by functions embedding Vesanto et al. (2001) <https://www.cis.hut.fi/projects/somtoolbox/ package/papers/techrep.pdf>  heuristic rules for map inizialization parameters, kmeans clustering algorithm and map features visualization. Cluster profiles visualization as well as graphs dedicated to the visualization of time-dependent variables Licen et al. (2020) <doi:10.4209/aaqr.2019.08.0414> are provided.
+Description: Self-Organizing Map algorithm application for the analysis of multivariate environmental high frequency data. This package is dedicated to the analysis of multivariate environmental high frequency data by Self-Organizing Map and k-means clustering algorithms. By means of the graphical user interface it provides a comfortable way to elaborate by self-organizing map algorithm rather big datasets (txt files up to 100 MB ) obtained by environmental high-frequency monitoring by sensors/instruments. The functions present in the package are based on kohonen and openair packages implemented by functions embedding Vesanto et al. (2001) <https://www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf>  heuristic rules for map inizialization parameters, kmeans clustering algorithm and map features visualization. Cluster profiles visualization as well as graphs dedicated to the visualization of time-dependent variables Licen et al. (2020) <doi:10.4209/aaqr.2019.08.0414> are provided.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true

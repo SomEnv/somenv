@@ -25,7 +25,7 @@ Hexagons<-function (Coords,Row,Col,color = NA, border = "gray",unitcell=1)
    par(mar=c(1,1,1,2),pty="m",xpd=TRUE,family="serif");
    plot(c(1-2*Apo,Col+Apo),c(1-R,1+(Row-1)*(R*1.5)+R),
    type="n",xlab="",ylab="",xaxs="i",yaxs="i",xaxt="n",yaxt="n",bty="n");
-   for (i in c(1:nrow(Coords))) {Hexa(Coords$X[i],Coords$Y[i],col=color,border=border)}
+   for (i in c(1:nrow(Coords))) {Hexa(Coords$X[i],Coords$Y[i],color=color,border=border)}
 }
 
 
