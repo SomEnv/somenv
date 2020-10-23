@@ -5,6 +5,13 @@
 
 library(shinycssloaders)
 library(shinycustomloader)
+library(SOMEnv)
+library(kohonen)
+library(rlist)
+library(dplyr)
+library(plyr)
+library(shiny)
+library(colourpicker)
 
 #---- Upload file fino a 100 MB consentito:
 
