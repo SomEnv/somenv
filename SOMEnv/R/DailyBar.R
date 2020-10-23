@@ -16,6 +16,7 @@
 #' @return Plot of daily percentages for each cluster, the latter element in the legend represents percentage of not determined data
 #' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
 #' }
+#' @export
 
 
 DailyBar<-function(experimental,TrainClus,colSeq=rainbow(length(levels(as.factor(TrainClus)))),Total=1440,xdim=0.7,ydim=0.8)

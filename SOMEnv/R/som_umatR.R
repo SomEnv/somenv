@@ -14,6 +14,7 @@
 #' A. Ultsch, H.P. Siemon, Proceedings of International Neural Network Conference
 #' (INNC?90), Kluwer academic Publishers, Dordrecht, 1990, pp. 305?308.
 #' }
+#' @export
 
 som_umatR<-function(codebook,Row,Col) {
 

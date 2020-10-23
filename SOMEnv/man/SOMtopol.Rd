@@ -20,8 +20,7 @@ This function returns the topographical error
 Calculate topographical error for the SOM map
 }
 \references{
-{Clark, S., Sisson, S.A., Sharma, A. (2020) Adv. Water Resour. 143, art. no. 103676 DOI: 10.1016/j.advwatres.2020.103676
-}
+{Clark, S., Sisson, S.A., Sharma, A. (2020) Adv. Water Resour. 143, art. no. 103676 DOI: 10.1016/j.advwatres.2020.103676}
 }
 \author{
 Sabina Licen

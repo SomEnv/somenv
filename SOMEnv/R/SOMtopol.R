@@ -7,9 +7,9 @@
 #' @param grid SOM grid expressed as a matrix of x and y coordinates of the map units
 #' @author Sabina Licen
 #' @return This function returns the topographical error
-#' @references {Clark, S., Sisson, S.A., Sharma, A. (2020) Adv. Water Resour. 143, art. no. 103676 DOI: 10.1016/j.advwatres.2020.103676
-#' }
-#'@importFrom stats dist
+#' @references {Clark, S., Sisson, S.A., Sharma, A. (2020) Adv. Water Resour. 143, art. no. 103676 DOI: 10.1016/j.advwatres.2020.103676}
+#' @export
+#' @importFrom stats dist
 
 SOMtopol<-function(dataset,codebook,grid) {
               GridDist<-round(as.matrix(dist(grid)),digits=3)

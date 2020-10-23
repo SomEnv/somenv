@@ -18,6 +18,7 @@
 #' @references {J. Vesanto, J. Himberg, E. Alhoniemi, J. Parhankagas, SOM Toolbox for Matlab
 #' 5, Report A57, 2000, Available at: www.cis.hut.fi/projects/somtoolbox/package/papers/techrep.pdf
 #' }
+#' @export
 
 
 kmeans_clustersRProg<-function(codebook,k=5,times=5,seed=NULL) {

@@ -9,6 +9,7 @@
 #' @import openair dplyr
 #' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
 #' }
+#' @export
 
 FreqD<-function(Date,Cluster,Total=1440)
 {   nClus<-length(levels(as.factor(Cluster)))

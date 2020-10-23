@@ -3,15 +3,6 @@
 #Cambiata funzione SOMtopol e quindi cambiato un po' lo script nel server
 #Cambiato lo script per la conta delle Hits nel server (non comparivano i prototipi con 0 hits!)
 
-library(shinycssloaders)
-library(shinycustomloader)
-library(SOMEnv)
-library(kohonen)
-library(rlist)
-library(dplyr)
-library(plyr)
-library(shiny)
-library(colourpicker)
 
 #---- Upload file fino a 100 MB consentito:
 
@@ -594,7 +585,7 @@ server <- function(input, output,session) {
 
   ############################### CAMBIATO DA QUI: ############################################################
 
-  Experimental <- eventReactive(input$go11,{import(input$Experimental$datapath,date="date",date.format=input$text11,
+  Experimental <- eventReactive(input$go11,{openair::import(input$Experimental$datapath,date="date",date.format=input$text11,
                                                    file.type = "txt",header = 1,sep = input$text12,dec=input$text13)})
   ############################### A QUI. ######################################################################
   #--- Elimination of NA values:
@@ -632,7 +623,7 @@ server <- function(input, output,session) {
 
   #--- Default SOM map dimensions:
 
-  DimsD<-reactive({som_dimR(dataset(),type=input$Size)}) #QUESTO dipende da un input, quindi non serve "Restore Button", basta ricambiare "Size" e si torna ai default!!!!
+  DimsD<-reactive({SOMEnv::som_dimR(dataset(),type=input$Size)}) #QUESTO dipende da un input, quindi non serve "Restore Button", basta ricambiare "Size" e si torna ai default!!!!
 
   output$UIinput21 <- renderUI({if(input$go11==0) {
     tagList(
@@ -653,7 +644,7 @@ server <- function(input, output,session) {
 
   #--- Parameters evaluated from inputs:
 
-  Init<-reactive({som_initR(dataset(),Dims()$Row,Dims()$Col,Dims()$munits)})
+  Init<-reactive({SOMEnv::som_initR(dataset(),Dims()$Row,Dims()$Col,Dims()$munits)})
   dlen<-reactive({nrow(dataset())})
   mpd<-reactive({Dims()$munits/dlen()})
 
@@ -716,11 +707,11 @@ server <- function(input, output,session) {
   DeCod <- reactive({data.frame(t(apply(codebook(), 1, function(r)r*ScaleVal()+ CenterVal())))})
 
   #--- Prototype x and y coordinates
-  Coord<-eventReactive(input$go21,{CodeCoord(input$Row,input$Col)})
+  Coord<-eventReactive(input$go21,{SOMEnv::CodeCoord(input$Row,input$Col)})
 
   #--- Umatrix
 
-  Umat<-reactive({som_umatR(codebook(), input$Row,input$Col)})
+  Umat<-reactive({SOMEnv::som_umatR(codebook(), input$Row,input$Col)})
 
 
   #--- Output:
@@ -749,7 +740,7 @@ server <- function(input, output,session) {
                               Neigh=input$Neigh,Dims=Dims(),Coord=Coord(),codebook=codebook(),DeCod=DeCod(),Umat=Umat(),Hits=Hits(),Bmus=Bmus(),Qerrs=Qerrs())})
 
 
-  output$down21<-downloadHandler(filename=function() {paste0("SOM_output_",format(Sys.time(),format="%Y-%m-%d_%H:%M"),".RData")},
+  output$down21<-downloadHandler(filename=function() {paste0("SOM_output_",format(Sys.time(),format="%Y-%m-%d_%H-%M"),".RData")},
                                  content = function(file) {
                                    SOMoutput<-OutputRdata()
                                    list.save(SOMoutput,file=file)}
@@ -765,7 +756,7 @@ server <- function(input, output,session) {
 
   ############################### CAMBIATO DA QUI (20201008): ############################################################
 
-  TE<-eventReactive(input$go23,{SOMtopol(as.matrix(dataset()),as.matrix(codebook()),as.matrix(som_model()$grid$pts))})
+  TE<-eventReactive(input$go23,{SOMEnv::SOMtopol(as.matrix(dataset()),as.matrix(codebook()),as.matrix(som_model()$grid$pts))})
 
   output$texto24<-renderPrint({cat(TE())})
 
@@ -804,9 +795,9 @@ server <- function(input, output,session) {
   )})
 
 
-  Table30<-function() {SumTable<-paramQuant(SOMoutput()$DeCod[,1]); ##################################----- de-normalized!
+  Table30<-function() {SumTable<-SOMEnv::paramQuant(SOMoutput()$DeCod[,1]); ##################################----- de-normalized!
   for (i in c(2:ncol(SOMoutput()$DeCod))) {
-    P<-paramQuant(SOMoutput()$DeCod[,i]);SumTable<-cbind(SumTable,P[,2])}
+    P<-SOMEnv::paramQuant(SOMoutput()$DeCod[,i]);SumTable<-cbind(SumTable,P[,2])}
   colnames(SumTable)<-c("Statistic",colnames(SOMoutput()$DeCod))
   SumTable<-data.frame(SumTable)
   return(SumTable)
@@ -818,7 +809,7 @@ server <- function(input, output,session) {
   )
 
   Plot31<- function() {if (is.null(input$SOMoutput)) {return(NULL)
-  } else {HexagonsVar(c(input$n31,input$n32),SOMoutput()$codebook,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)}}
+  } else {SOMEnv::HexagonsVar(c(input$n31,input$n32),SOMoutput()$codebook,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)}}
 
   output$plot31<- renderPlot({if (input$go32[[1]] == 0) return(); Plot31()})
 
@@ -843,12 +834,12 @@ server <- function(input, output,session) {
 
   Plot32<- function() {switch(Switch3(),
                               "  "={return(NULL)},
-                              "umatgs"={UmatGraph(SOMoutput()$Umat,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col,colorscale="gs")},
-                              "umatbw"={UmatGraph(SOMoutput()$Umat,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col,colorscale="bw")},
-                              "hitsgrayscale"={HexaHitsQuant(SOMoutput()$Hits,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
-                              "hitsblack filling"={HexaHits(SOMoutput()$Hits,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
-                              "qerrsgrayscale"={HexaQerrsQuant(SOMoutput()$Bmus,SOMoutput()$Qerrs,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
-                              "qerrsblack filling"={HexaQerrs(SOMoutput()$Bmus,SOMoutput()$Qerrs,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)})
+                              "umatgs"={SOMEnv::UmatGraph(SOMoutput()$Umat,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col,colorscale="gs")},
+                              "umatbw"={SOMEnv::UmatGraph(SOMoutput()$Umat,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col,colorscale="bw")},
+                              "hitsgrayscale"={SOMEnv::HexaHitsQuant(SOMoutput()$Hits,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
+                              "hitsblack filling"={SOMEnv::HexaHits(SOMoutput()$Hits,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
+                              "qerrsgrayscale"={SOMEnv::HexaQerrsQuant(SOMoutput()$Bmus,SOMoutput()$Qerrs,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
+                              "qerrsblack filling"={SOMEnv::HexaQerrs(SOMoutput()$Bmus,SOMoutput()$Qerrs,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)})
   }
 
   output$plot32<- renderPlot({Plot32()})
@@ -862,14 +853,14 @@ server <- function(input, output,session) {
   )
   #-- Basic statistics
 
-  Table31<-function() {paramQuant(SOMoutput()$Hits)}
+  Table31<-function() {SOMEnv::paramQuant(SOMoutput()$Hits)}
 
   output$down33 <- downloadHandler(filename ="Hits_basic statistics.txt",
                                    content = function(file) {
                                      write.table(Table31(), file, row.names = F,col.names=T,sep="\t",quote=F)}
   )
 
-  Table32<-function() {paramQuant(SOMoutput()$Qerrs)}
+  Table32<-function() {SOMEnv::paramQuant(SOMoutput()$Qerrs)}
 
   output$down34 <- downloadHandler(filename ="Qerrs_basic statistics.txt",
                                    content = function(file) {
@@ -888,16 +879,16 @@ server <- function(input, output,session) {
                                "No"={paste0("No")})
   }
 
-  Kmeans <- eventReactive(input$go41,{if (Switch41()=="No"){kmeans_clustersRProg(SOMoutput()$codebook,k=input$n41,times=input$n42)
-  } else {kmeans_clustersRProg(SOMoutput()$codebook,k=input$n41,times=input$n42,seed=input$Seed) }
+  Kmeans <- eventReactive(input$go41,{if (Switch41()=="No"){SOMEnv::kmeans_clustersRProg(SOMoutput()$codebook,k=input$n41,times=input$n42)
+  } else {SOMEnv::kmeans_clustersRProg(SOMoutput()$codebook,k=input$n41,times=input$n42,seed=input$Seed) }
   })
 
   #-- Risultati aggiuntivi:
 
-  BCentr<-reactive({BmusCentr(Kmeans()$centroids,SOMoutput()$som_model,input$n41)})
+  BCentr<-reactive({SOMEnv::BmusCentr(Kmeans()$centroids,SOMoutput()$som_model,input$n41)})
 
   ClusExp<-function() {D<-rep(0,nrow(SOMoutput()$ExpClean))
-  for (i in c(2:input$n41)) {d<-BmusClus(SOMoutput()$Bmus,Kmeans()$clusNum[,i]);
+  for (i in c(2:input$n41)) {d<-SOMEnv::BmusClus(SOMoutput()$Bmus,Kmeans()$clusNum[,i]);
   D<-cbind(D,d)}; return(data.frame(D))}
 
   #-- Output:
@@ -905,7 +896,7 @@ server <- function(input, output,session) {
   OutputKdata<-reactive({list(centroids=Kmeans()$centroids,clusNum=data.frame(Kmeans()$clusNum),ind=Kmeans()$ind,
                               err=Kmeans()$err,seed=Kmeans()$seed,BCentr=BCentr(),ClusExp=ClusExp())})
 
-  output$down41<-downloadHandler(filename=function() {paste0("Kmeans_output_",format(Sys.time(),format="%Y-%m-%d_%H:%M"),".RData")},
+  output$down41<-downloadHandler(filename=function() {paste0("Kmeans_output_",format(Sys.time(),format="%Y-%m-%d_%H-%M"),".RData")},
                                  content = function(file) {
                                    KmeansOutput<-OutputKdata()
                                    list.save(KmeansOutput,file=file)}
@@ -981,15 +972,15 @@ server <- function(input, output,session) {
 
 
   Centroids4<-reactive({data.frame(KmeansForPlot()$centroids[[input$n43]][order(numSeq41()),])})
-  clusNum4<-reactive({NClusChange(KmeansForPlot()$clusNum[,input$n43],numSeq41())})
+  clusNum4<-reactive({SOMEnv::NClusChange(KmeansForPlot()$clusNum[,input$n43],numSeq41())})
   BCentr4<-reactive({KmeansForPlot()$BCentr[[input$n43]][order(numSeq41())]})
-  ClusExp4<-reactive({NClusChange(KmeansForPlot()$ClusExp[,input$n43],numSeq41())})
+  ClusExp4<-reactive({SOMEnv::NClusChange(KmeansForPlot()$ClusExp[,input$n43],numSeq41())})
 
 
   Plot42<- function() {if (is.null(KmeansForPlot())) {return(NULL)
   } else if (is.null(SOMoutput())) {return(NULL)
   } else if (length(numSeq41())!=input$n43) {return(NULL)
-  } else {HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
+  } else {SOMEnv::HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
                        SOMoutput()$Coord, SOMoutput()$Dims$Row, SOMoutput()$Dims$Col, colSeq = colSeq4())}
   }
 
@@ -1041,10 +1032,10 @@ server <- function(input, output,session) {
   } else if (is.null(SOMoutput())) {return(NULL)
   } else if (length(numSeq41())!=input$n43) {return(NULL)
   } else {switch(input$menu41,
-                 "by cluster"={BoxUnits(SOMoutput()$codebook,clusNum4(),Ylim=numSeq43(),pitch=numSeq42(),xdim=input$x41)},
-                 "by variable"={BoxClus(c(input$n44,input$n45),SOMoutput()$DeCod,clusNum4())},
-                 "Exp by cluster"={BoxUnits(SOMoutput()$dataset,ClusExp4(),Ylim=numSeq43(),pitch=numSeq42(),xdim=input$x41)},
-                 "Exp by variable"={BoxClus(c(input$n44,input$n45),SOMoutput()$ExpClean[,-1],ClusExp4())})}
+                 "by cluster"={SOMEnv::BoxUnits(SOMoutput()$codebook,clusNum4(),Ylim=numSeq43(),pitch=numSeq42(),xdim=input$x41)},
+                 "by variable"={SOMEnv::BoxClus(c(input$n44,input$n45),SOMoutput()$DeCod,clusNum4())},
+                 "Exp by cluster"={SOMEnv::BoxUnits(SOMoutput()$dataset,ClusExp4(),Ylim=numSeq43(),pitch=numSeq42(),xdim=input$x41)},
+                 "Exp by variable"={SOMEnv::BoxClus(c(input$n44,input$n45),SOMoutput()$ExpClean[,-1],ClusExp4())})}
   }
 
   output$plot43<-renderPlot({if (is.null(KmeansForPlot())|input$go43==0 ) {return(NULL)
@@ -1069,7 +1060,7 @@ server <- function(input, output,session) {
 
   ############################### CAMBIATO DA QUI: ############################################################
 
-  Other <- eventReactive(input$go51,{import(input$Other$datapath,date="date",date.format=input$text51,
+  Other <- eventReactive(input$go51,{openair::import(input$Other$datapath,date="date",date.format=input$text51,
                                             file.type = "txt",header = 1,sep = input$text52,dec=input$text53)})
 
   ############################### A QUI #######################################################################
@@ -1114,7 +1105,7 @@ server <- function(input, output,session) {
   #---- Cluster assignment (respect to Kmeans graphs in third tab!)
 
   ClusProj<-function() {D<-rep(0,length(BmusPROJ()))
-  for (i in c(2:length(KmeansForPlot()$ind))) {d<-BmusClus(BmusPROJ(),KmeansForPlot()$clusNum[,i]);
+  for (i in c(2:length(KmeansForPlot()$ind))) {d<-SOMEnv::BmusClus(BmusPROJ(),KmeansForPlot()$clusNum[,i]);
   D<-cbind(D,d)}; return(data.frame(D))}
 
 
@@ -1124,7 +1115,7 @@ server <- function(input, output,session) {
   OutputPdata<-reactive({list(OtherClean=OtherClean(),newdata=newdata(),HitsPROJ=HitsPROJ(),BmusPROJ=BmusPROJ(),QerrsPROJ=QerrsPROJ(),ClusProj=ClusProj())})
 
 
-  output$down51<-downloadHandler(filename=function() {paste0("Projection_output_",format(Sys.time(),format="%Y-%m-%d_%H:%M"),".RData")},
+  output$down51<-downloadHandler(filename=function() {paste0("Projection_output_",format(Sys.time(),format="%Y-%m-%d_%H-%M"),".RData")},
                                  content = function(file) {
                                    SOMoutput<-OutputPdata()
                                    list.save(SOMoutput,file=file)}
@@ -1152,10 +1143,10 @@ server <- function(input, output,session) {
 
   Plot51<- function() {switch(Switch5(),
                               "  "={return(NULL)},
-                              "hitsgrayscale"={HexaHitsQuant(ProjForPlot()$HitsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
-                              "hitsblack filling"={HexaHits(ProjForPlot()$HitsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
-                              "qerrsgrayscale"={HexaQerrsQuant(ProjForPlot()$BmusPROJ,ProjForPlot()$QerrsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
-                              "qerrsblack filling"={HexaQerrs(ProjForPlot()$BmusPROJ,ProjForPlot()$QerrsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)})
+                              "hitsgrayscale"={SOMEnv::HexaHitsQuant(ProjForPlot()$HitsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
+                              "hitsblack filling"={SOMEnv::HexaHits(ProjForPlot()$HitsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
+                              "qerrsgrayscale"={SOMEnv::HexaQerrsQuant(ProjForPlot()$BmusPROJ,ProjForPlot()$QerrsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)},
+                              "qerrsblack filling"={SOMEnv::HexaQerrs(ProjForPlot()$BmusPROJ,ProjForPlot()$QerrsPROJ,SOMoutput()$Coord,SOMoutput()$Dims$Row,SOMoutput()$Dims$Col)})
   }
 
   output$plot51<- renderPlot({Plot51()})
@@ -1170,14 +1161,14 @@ server <- function(input, output,session) {
 
   #-- Basic statistics
 
-  Table51<-function() {paramQuant(ProjForPlot()$HitsPROJ)}
+  Table51<-function() {SOMEnv::paramQuant(ProjForPlot()$HitsPROJ)}
 
   output$down53 <- downloadHandler(filename ="Hits_projection_basic statistics.txt",
                                    content = function(file) {
                                      write.table(Table51(), file, row.names = F,col.names=T,sep="\t",quote=F)}
   )
 
-  Table52<-function() {paramQuant(ProjForPlot()$QerrsPROJ)}
+  Table52<-function() {SOMEnv::paramQuant(ProjForPlot()$QerrsPROJ)}
 
   output$down54 <- downloadHandler(filename ="Qerrs_projection_basic statistics.txt",
                                    content = function(file) {
@@ -1187,7 +1178,7 @@ server <- function(input, output,session) {
   #-- Cluster profiles (projection) --> respect to fourth tab parameters!!!
 
 
-  ClusProj4<-reactive({NClusChange(ProjForPlot()$ClusProj[,input$n43],numSeq41())})
+  ClusProj4<-reactive({SOMEnv::NClusChange(ProjForPlot()$ClusProj[,input$n43],numSeq41())})
 
 
 
@@ -1195,8 +1186,8 @@ server <- function(input, output,session) {
   } else if (is.null(ProjForPlot())) {return(NULL)
   } else if (length(numSeq41())!=input$n43) {return(NULL)
   } else {switch(input$menu53,
-                 "Proj by cluster"={BoxUnits(ProjForPlot()$newdata,ClusProj4(),Ylim=numSeq43(),pitch=numSeq42(),xdim=input$x41)},
-                 "Proj by variable"={BoxClus(c(input$n44,input$n45),ProjForPlot()$OtherClean[,-1],ClusProj4())})}
+                 "Proj by cluster"={SOMEnv::BoxUnits(ProjForPlot()$newdata,ClusProj4(),Ylim=numSeq43(),pitch=numSeq42(),xdim=input$x41)},
+                 "Proj by variable"={SOMEnv::BoxClus(c(input$n44,input$n45),ProjForPlot()$OtherClean[,-1],ClusProj4())})}
   }
 
   output$plot52<-renderPlot({if (is.null(ProjForPlot())) {return(NULL)
@@ -1257,7 +1248,7 @@ server <- function(input, output,session) {
 
   #--- Daily Graph
 
-  Plot61<- function() {DailyBar(Selection(),Selection()$Cluster,colSeq=colSeq4(),Total=input$n61,xdim=input$x61,ydim=0.8)}
+  Plot61<- function() {SOMEnv::DailyBar(Selection(),Selection()$Cluster,colSeq=colSeq4(),Total=input$n61,xdim=input$x61,ydim=0.8)}
 
   output$plot61<- renderPlot({Plot61()})
 
@@ -1271,7 +1262,7 @@ server <- function(input, output,session) {
 
   #--- Download tables:
 
-  Table61<-function() {FreqD(Selection()$date,Selection()$Cluster,Total=input$n61)}
+  Table61<-function() {SOMEnv::FreqD(Selection()$date,Selection()$Cluster,Total=input$n61)}
 
   output$down62 <- downloadHandler(filename ="Interval selection.txt",
                                    content = function(file) {
@@ -1279,8 +1270,8 @@ server <- function(input, output,session) {
   )
 
   Table62<-function() {switch(input$menu61,
-                              "training"={Freq(ClusExp4())},
-                              "projection"={Freq(ClusProj4())})
+                              "training"={SOMEnv::Freq(ClusExp4())},
+                              "projection"={SOMEnv::Freq(ClusProj4())})
   }
 
   output$down63 <- downloadHandler(filename ="Overall.txt",
@@ -1288,7 +1279,7 @@ server <- function(input, output,session) {
                                      write.table(Table62(), file, row.names = F,col.names=T,sep="\t",quote=F)}
   )
 
-  Table63<-function() {FreqM(ForDailyGraph()$date,ForDailyGraph()$Cluster)}
+  Table63<-function() {SOMEnv::FreqM(ForDailyGraph()$date,ForDailyGraph()$Cluster)}
 
   output$down64 <- downloadHandler(filename ="Monthly.txt",
                                    content = function(file) {
@@ -1359,7 +1350,7 @@ server <- function(input, output,session) {
     i<-1
     #---qua il primo grafico:
     par(fig=c(0, 0.5, 0, 1),oma=c(1,1,1,1),mar=c(1,1.2,1,1.2),xpd=TRUE,pty="m",family="serif");
-    HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
+    SOMEnv::HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
                  SOMoutput()$Coord, SOMoutput()$Dims$Row, SOMoutput()$Dims$Col, colSeq = colSeq4())
     mtext(SelDay()[,"date"][i],side=3,lin=0.5);
     #--qua ultimo dato:

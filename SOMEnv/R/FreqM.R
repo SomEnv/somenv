@@ -8,6 +8,7 @@
 #' @import openair
 #' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
 #' }
+#' @export
 
 
 FreqM<-function(Date,Cluster)

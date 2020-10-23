@@ -11,6 +11,7 @@
 #' @return Plot a SOM map with filled hexagons according to the number of hits
 #' @references {Licen, S., Cozzutto, S., Barbieri, P. (2020) Aerosol Air Qual. Res., 20 (4), pp. 800-809. DOI: 10.4209/aaqr.2019.08.0414
 #' }
+#' @export
 
 HexaHits<-function(hits,Coord,Row,Col,color="black")
 {  Unitcell<-1
