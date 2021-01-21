@@ -1,6 +1,7 @@
 Package: SOMEnv
 Type: Package
-Title: SOM Algorithm for the Analysis of Multivariate Environmental Data
+Title: SOM Algorithm for the Analysis of Multivariate Environmental
+        Data
 Version: 0.1.1
 Authors@R: c(
 	person("Sabina", "Licen", role=c("aut", "cre"), email= "slicen@units.it"),
@@ -14,15 +15,13 @@ License: GPL-2
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.1
-Imports: 
-	rlist,
-	kohonen,
-	shiny,
-	dplyr,
-	plyr,
-	openair,
-	colourpicker,
-	shinycssloaders,
-	shinycustomloader
+Imports: rlist, kohonen, shiny, dplyr, plyr, openair, colourpicker,
+        shinycssloaders, shinycustomloader
 URL: https://github.com/SomEnv/somenv
 BugReports: https://github.com/SomEnv/somenv/issues
+NeedsCompilation: no
+Packaged: 2020-12-20 23:48:16 UTC; brobr
+Author: Sabina Licen [aut, cre],
+  Marco Franzon [aut],
+  Tommaso Rodani [aut],
+  Pierluigi Barbieri [aut]

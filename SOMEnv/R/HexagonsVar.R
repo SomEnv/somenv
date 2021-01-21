@@ -25,7 +25,7 @@ HexagonsVar<-function (Dms,codebook,Coords,Row,Col)
   if ((Dms[1]*Dms[2])>=length(ColIndex)) {ColIndex<-ColIndex
   } else {ColIndex<-c(1:(Dms[1]*Dms[2]))}
   colSeq <- c("gray95","gray85","gray75","gray60","gray50","black");
-  par(mfrow=Dms,oma=c(0,0.2,0.5,0.2),xpd=FALSE,pty="m",family="serif")
+  opar <- par(mfrow=Dms,oma=c(0,0.2,0.5,0.2),xpd=FALSE,pty="m",family="serif")
 for (j in ColIndex) {
   Var<-j
   BOX<-boxplot(codebook[,Var],plot=FALSE);
@@ -46,5 +46,6 @@ Hexagons(Coords,Row,Col,color = NA, border = NA);
    Colors<-as.character(FACT);
    for (i in c(1:nrow(Coords))) {Hexa(Coords$X[i],Coords$Y[i],color=Colors[i],border=NA)}
    mtext(colnames(codebook)[Var],line = 0,side=3,cex=0.75,family="serif",font=2)
-               }
+}
+  on.exit(par(opar))
 }

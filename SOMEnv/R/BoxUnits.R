@@ -28,8 +28,8 @@ BoxUnits<-function(codebook,Cluster,Ylim=NA,pitch=NA,xdim=0.75)
                       m<-min(BOX$stats);
                       Ylim<-c(m-(M-m)/10,M+(M-m)/5)
     } else {m<-Ylim[1];M<-Ylim[2]}
-  par(mfrow=c(nClus,1),oma=c(0.5,0.5,0,0.5),xpd=FALSE,pty="m",family="serif")
-  for (j in c(1:nClus)) {par(mar=c(1.4,1,1.7,0.5));
+  opar <- par(mfrow=c(nClus,1),oma=c(0.5,0.5,0,0.5),xpd=FALSE,pty="m",family="serif")
+  for (j in c(1:nClus)) {opar <- par(mar=c(1.4,1,1.7,0.5));
   boxplot(data[which(data$Cluster==j),1],range=0,xaxt="n",yaxt="n",xlim=c(1,ncol(codebook)),ylim=Ylim,
   boxwex=0.9,at=1,whisklty = 0, staplelty = 0);
     if (is.na(sum(pitch))) {abline(h=c(0,round(M,digits=0)),col="gray")
@@ -42,4 +42,5 @@ BoxUnits<-function(codebook,Cluster,Ylim=NA,pitch=NA,xdim=0.75)
     axis(2,at=c(0,round(M,digits=0)),labels=c(0,round(M,digits=0)),lwd=0,line=-0.7,cex.axis=0.75,las=2);
     } else {axis(2,at=pitch,labels=NA,tcl=-0.3,cex.axis=0.7);axis(2,at=pitch,labels=pitch,lwd=0,line=-0.7,cex.axis=0.75,las=2)}
   mtext(paste("Cluster ",j,sep=""),line = 0.2,side=3,cex=0.75,family="serif")}
+  on.exit(par(opar))
 }

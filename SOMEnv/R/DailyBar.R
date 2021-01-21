@@ -36,7 +36,7 @@ DailyBar<-function(experimental,TrainClus,colSeq=rainbow(length(levels(as.factor
     colnames(FRE)<-paste0(substr(interval, 9, 10),"/",substr(interval, 6, 7))
     FRE2<-as.matrix(FRE)
 LAB<-colnames(FRE2)
-par(oma=c(0,0,0,0),xpd=T)
+opar <- par(oma=c(0,0,0,0),xpd=T)
 BAR<-barplot(FRE2,col=colSeq,ylab="",xlab="",xaxt="n",yaxt="n",ylim=c(0,100),density=c(rep(NA,nClus),10),angle=c(rep(NA,nClus),45))
     axis(1,at=BAR,labels=NA,tcl=-0.3,cex.axis=xdim)
     axis(1,at=BAR,labels=LAB,lwd=0,line=-0.5,cex.axis=xdim,las=2)
@@ -46,5 +46,6 @@ BAR<-barplot(FRE2,col=colSeq,ylab="",xlab="",xaxt="n",yaxt="n",ylim=c(0,100),den
     F<-BAR[length(BAR)]
     legend(quantile(BAR,prob=0.1),110,ncol=nClus+1,legend=c(paste("Cl",seq(1,nClus,1),sep=""),"ND"),fill=colSeq,bty="n",cex=0.85,
     density=c(rep(NA,nClus),10),angle=c(rep(NA,nClus),45))
+    on.exit(par(opar))
 }
 

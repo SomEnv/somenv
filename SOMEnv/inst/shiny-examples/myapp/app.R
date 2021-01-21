@@ -64,7 +64,7 @@ CSS51<-'padding-left: 1px;padding-right: 1px;padding-top: 1px;padding-bottom: 1p
 
 ui <- pageWithSidebar(
 
-  headerPanel(div(style=CSSHeader,"SOMEnv Graphical User Interface (v 0.0)"),windowTitle = "SOMEnv GUI"),
+  headerPanel(div(style=CSSHeader,"SOMEnv Graphical User Interface (v 0.1.1)"),windowTitle = "SOMEnv GUI"),
 
   sidebarPanel(width=3,style='background: white; padding: 1px',
 
@@ -940,13 +940,14 @@ server <- function(input, output,session) {
 
   Plot41<-function(){if (is.null(KmeansForPlot())) {return(NULL)
   } else {
-    par(mar=c(4,3,1,1),oma=c(1,1,1,1))
+    opar <- par(mar=c(4,3,1,1),oma=c(1,1,1,1))
     plot(c(2:(length(KmeansForPlot()$ind)+1)),KmeansForPlot()$ind,col="gray",xlim=c(1,length(KmeansForPlot()$ind)+2),type="h",
          ylim=c(min(KmeansForPlot()$ind,na.rm=T)-0.05*min(KmeansForPlot()$ind,na.rm=T),max(KmeansForPlot()$ind,na.rm=T)+0.05*max(KmeansForPlot()$ind,na.rm=T)),
          xlab="Cluster number",ylab="DB-index",xaxt="n")
     text(c(2:(length(KmeansForPlot()$ind)+1)),KmeansForPlot()$ind,round(KmeansForPlot()$ind,digit=2),cex=0.75,pos=3)
     axis(1,at=seq(2,length(KmeansForPlot()$ind)+1,1),labels=NA,tcl=-0.3,cex.axis=0.6)
     axis(1,at=seq(2,length(KmeansForPlot()$ind)+1,1),labels=seq(2,length(KmeansForPlot()$ind)+1,1),lwd=0,line=-0.2,cex.axis=1)}
+    on.exit(par(opar))
   }
 
   output$plot41<-renderPlot({if (is.null(KmeansForPlot())) {return(NULL)
@@ -980,9 +981,12 @@ server <- function(input, output,session) {
   Plot42<- function() {if (is.null(KmeansForPlot())) {return(NULL)
   } else if (is.null(SOMoutput())) {return(NULL)
   } else if (length(numSeq41())!=input$n43) {return(NULL)
-  } else {SOMEnv::HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
+  } else {
+    opar <- par(mar=c(1,1,1,2))
+    SOMEnv::HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
                        SOMoutput()$Coord, SOMoutput()$Dims$Row, SOMoutput()$Dims$Col, colSeq = colSeq4())}
-  }
+    on.exit(par(opar))
+    }
 
 
   output$plot42<-renderPlot({if (is.null(KmeansForPlot())|input$go43==0 ) {return(NULL)
@@ -1349,14 +1353,13 @@ server <- function(input, output,session) {
     Xdim<-input$x41
     i<-1
     #---qua il primo grafico:
-    par(fig=c(0, 0.5, 0, 1),oma=c(1,1,1,1),mar=c(1,1.2,1,1.2),xpd=TRUE,pty="m",family="serif");
+    opar <- par(fig=c(0, 0.5, 0, 1),oma=c(1,1,1,1),mar=c(1,1.2,1,1.2),xpd=TRUE,pty="m",family="serif");
     SOMEnv::HexagonsClus(Centroids4(), clusNum4(), BCentr4(),
                  SOMoutput()$Coord, SOMoutput()$Dims$Row, SOMoutput()$Dims$Col, colSeq = colSeq4())
     mtext(SelDay()[,"date"][i],side=3,lin=0.5);
     #--qua ultimo dato:
     points(SOMoutput()$Coord$X[SLN[i]], SOMoutput()$Coord$Y[SLN[i]],pch=16,cex=1,col="black")
     mtext(paste0("Qe=", round(SelDay()[,4][i],digit=3)),side=1,lin=0.5);
-
     #--------qua parte destra con boxplot:
     #-------------------senza whiskers!!!!--------------------------------
     StepB<-1/nClus;
@@ -1364,8 +1367,8 @@ server <- function(input, output,session) {
     NULLO<-data.frame(matrix(-100000,nrow=nClus,ncol=ncol(SOMoutput()$codebook)))
     NULLO[SelDay()[i,"Cluster"],]<-SelBOX()[i,-1]
     for (w in c(1:nClus)) {
-      par(fig=c(0.5, 1, SeqB[w+1], SeqB[w]),mar=c(1.4,1,1.7,0.5),oma=c(0.5,0.5,0,0.5),xpd=FALSE,pty="m",family="serif");
-      par(new=TRUE);
+      opar <- par(fig=c(0.5, 1, SeqB[w+1], SeqB[w]),mar=c(1.4,1,1.7,0.5),oma=c(0.5,0.5,0,0.5),xpd=FALSE,pty="m",family="serif");
+      opar <- par(new=TRUE);
       boxplot(SOMoutput()$codebook[which(clusNum4()==w),1],range=0,xaxt="n",yaxt="n",xlim=Xlim,ylim=Ylim,boxwex=0.9,at=1,whisklty = 0, staplelty = 0);
       abline(h=pitch,col="gray");
       for (f in c(1:ncol(SOMoutput()$codebook)))
@@ -1376,7 +1379,9 @@ server <- function(input, output,session) {
       axis(2,at=pitch,labels=pitch,lwd=0,line=-0.7,cex.axis=0.6,las=2);
       mtext(paste("Cluster ",w,sep=""),line = 0.2,side=3,cex=0.75,family="serif");
       points(seq(1,ncol(SOMoutput()$codebook),1),NULLO[w,], pch=16,col="red",cex=0.7)
+      on.exit(par(opar))
     }
+    on.exit(par(opar))
   } # END SingleSampPlot
 
 

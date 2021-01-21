@@ -19,7 +19,7 @@ BoxClus<-function (Dms,codebook,Cluster)
 { ColIndex<-c(1:ncol(codebook))
   if ((Dms[1]*Dms[2])>=length(ColIndex)) {ColIndex<-ColIndex
   } else {ColIndex<-c(1:(Dms[1]*Dms[2]))}
-  par(mfrow=Dms,oma=c(0.5,0.5,0.5,0.5),mar=c(1.5,1.5,2,1),xpd=FALSE,pty="m",family="serif")
+  opar <- par(mfrow=Dms,oma=c(0.5,0.5,0.5,0.5),mar=c(1.5,1.5,2,1),xpd=FALSE,pty="m",family="serif")
 for (j in ColIndex) {
   Var<-j
   BOX<-boxplot(codebook[,Var]~Cluster,xaxt="n",yaxt="n",boxwex=0.8,range=0)
@@ -28,5 +28,6 @@ for (j in ColIndex) {
   axis(2,labels=NA,tcl=-0.3,cex.axis=0.7);
   axis(2,lwd=0,line=-0.7,cex.axis=0.65,las=2)
   mtext(colnames(codebook)[Var],line = 0.2,side=3,cex=0.65,family="serif")
+  on.exit(par(opar))
                }
 }
